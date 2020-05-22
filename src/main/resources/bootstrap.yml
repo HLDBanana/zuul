@@ -21,11 +21,15 @@ spring:
   # 配置中心
   cloud:
     config:
-      discovery:
+      #第一种集成配置中心的方式，通过config的service-id映射 这种方式本地环境无法连接阿里配置中心服务 因为映射的是内网ip  本地无法访问
+      # 配置中心注册名称 默认去{label}/getway-{profile}.yml文件注册中心命名规则{name}-{profile}.yml   /{name}/{profile}/{label}
+      #discovery:
         # 配置中心注册名称 默认去{label}getway-{profile}.yml文件
-        service-id: SPRINGCLOUD-CONFIG
-        enabled: true
+        #service-id: SPRINGCLOUD-CONFIG
+        #enabled: true
       # 后缀 dev|prod
       profile: dev
       # dev|master分支，建议使用它区分生产、测试环境
       label: dev
+      # 第二种集成配置中心的方式，这里写配置中心服务的地址信息
+      uri: http://localhost:8991

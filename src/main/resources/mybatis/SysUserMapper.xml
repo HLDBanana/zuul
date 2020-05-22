@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanergy.out.dao.SysUserMapper">
+
+    <select id="findByPrimaryId" resultType="com.hanergy.out.entity.SysUser">
+        select * from sys_user where id = #{id}
+    </select>
+    <select id="searchByTreeIdAndKey" resultType="com.hanergy.out.entity.SysUser">
+        select u.* from cdt.cdt_divide_tree_user a
+            LEFT JOIN cdt.cdt_divide_tree b on a.tree_id = b.id
+            left join oa.sys_user u on a.user_id = u.id
+            where b.parent_id = #{treeId} and u.name like CONCAT('%',#{key},'%')
+    </select>
+</mapper>
